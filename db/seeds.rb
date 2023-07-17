@@ -34,7 +34,7 @@ puts 'Creating users...'
     password: '1234567',
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    location: ["Tokyo", "Osaka", "Kyoto", "Chiba", "Ibaraki", "Yokohama", "Nagoya", "Shizuoka"].sample
+    location: ["Meguro", "Shinagawa", "Shibuya", "Ueno", "Akihabara", "Ikebukuro", "Iidabashi"].sample
   )
   puts "Created user #{user.id}"
 

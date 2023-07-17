@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_30_030347) do
+ActiveRecord::Schema.define(version: 2023_07_13_134638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,10 +98,69 @@ ActiveRecord::Schema.define(version: 2022_07_30_030347) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wanpo_bookings", force: :cascade do |t|
+    t.bigint "wanpo_user_id", null: false
+    t.bigint "wanpo_dogsitting_id", null: false
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["wanpo_dogsitting_id"], name: "index_wanpo_bookings_on_wanpo_dogsitting_id"
+    t.index ["wanpo_user_id"], name: "index_wanpo_bookings_on_wanpo_user_id"
+  end
+
+  create_table "wanpo_dogsittings", force: :cascade do |t|
+    t.string "location"
+    t.string "availability"
+    t.integer "rate"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "day"
+    t.bigint "wanpo_user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["wanpo_user_id"], name: "index_wanpo_dogsittings_on_wanpo_user_id"
+  end
+
+  create_table "wanpo_pets", force: :cascade do |t|
+    t.bigint "wanpo_user_id", null: false
+    t.string "name"
+    t.integer "age"
+    t.string "breed"
+    t.string "size"
+    t.text "comments"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["wanpo_user_id"], name: "index_wanpo_pets_on_wanpo_user_id"
+  end
+
+  create_table "wanpo_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "location"
+    t.string "about_me"
+    t.float "longitude"
+    t.float "latitude"
+    t.index ["email"], name: "index_wanpo_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_wanpo_users_on_reset_password_token", unique: true
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "dogsittings"
   add_foreign_key "bookings", "users"
   add_foreign_key "dogsittings", "users"
   add_foreign_key "pets", "users"
+  add_foreign_key "wanpo_bookings", "wanpo_dogsittings"
+  add_foreign_key "wanpo_bookings", "wanpo_users"
+  add_foreign_key "wanpo_dogsittings", "wanpo_users"
+  add_foreign_key "wanpo_pets", "wanpo_users"
 end
