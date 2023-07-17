@@ -20,7 +20,7 @@ This application allows users to search from a list of dogsitting services and a
 - **Rails**
 - **Stimulus.js**
 - **Bootstrap**
-- **Devise** 
+- **Devise**
 - **Cloudinary**
 - **PG-Search**
 - **Geocoder**
@@ -39,4 +39,4 @@ The app should be available on the browser at `http://localhost:3000`
 - `views/`:   The main pages for the application.
 - `controllers/`:  Contains the controller actions for the application.
 - `assets/stylesheets/`:  Contains the files for front end visuals.
-- `javascript/controllers/`:  Contains the controller actions for Japavscript functions.
+- `javascript/controllers/`:  Contains the controller actions for Javacript functions.
